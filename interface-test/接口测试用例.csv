@@ -1,0 +1,36 @@
+﻿用例编号,接口名称,请求方法,接口地址,用例标题,请求参数,预期状态码,预期响应,优先级
+API-001,获取用户列表,GET,/users,正常获取用户列表,无,200,返回用户数组，包含id/name/email,高
+API-002,获取用户列表,GET,/users,_page参数分页,_page=1&_limit=10,200,返回10条用户数据，header含X-Total-Count,中
+API-003,获取用户列表,GET,/users,_page为0,_page=0,200,返回默认数量数据或第一页,低
+API-004,获取单个用户,GET,/users/1,正常获取用户详情,无,200,返回id=1的用户信息,高
+API-005,获取单个用户,GET,/users/9999,获取不存在的用户,无,404,返回空对象或404错误,高
+API-006,获取单个用户,GET,/users/abc,用户ID非数字,无,400或404,返回参数错误提示,中
+API-007,创建用户,POST,/users,正常创建用户,"{""name"":""test"",""email"":""test@test.com""}",201,返回创建的用户，含自增id,高
+API-008,创建用户,POST,/users,缺少必填字段name,"{""email"":""test@test.com""}",400或500,返回参数校验错误,高
+API-009,创建用户,POST,/users,email格式错误,"{""name"":""test"",""email"":""not-email""}",400,返回邮箱格式错误提示,中
+API-010,创建用户,POST,/users,name为空字符串,"{""name"":"""",""email"":""test@test.com""}",400,返回name不能为空,中
+API-011,更新用户,PUT,/users/1,正常更新用户信息,"{""name"":""updated"",""email"":""new@test.com""}",200,返回更新后的用户信息,高
+API-012,更新用户,PUT,/users/9999,更新不存在的用户,"{""name"":""test""}",404,返回用户不存在,高
+API-013,更新用户,PATCH,/users/1,部分更新用户,"{""name"":""partial""}",200,返回更新后用户，name已修改,中
+API-014,删除用户,DELETE,/users/1,正常删除用户,无,200,删除成功，返回空对象或被删用户,高
+API-015,删除用户,DELETE,/users/9999,删除不存在的用户,无,404,返回用户不存在,中
+API-016,获取商品列表,GET,/products,正常获取商品列表,无,200,返回商品数组，含title/price,高
+API-017,获取商品列表,GET,/products,按价格排序,_sort=price&_order=asc,200,商品按价格升序排列,中
+API-018,获取商品列表,GET,/products,按标题搜索,q=phone,200,返回标题含phone的商品,中
+API-019,获取商品列表,GET,/products,价格区间筛选,price_gte=100&price_lte=500,200,返回价格在100-500的商品,中
+API-020,获取单个商品,GET,/products/1,正常获取商品详情,无,200,返回商品详情信息,高
+API-021,创建商品,POST,/products,正常创建商品,"{""title"":""新商品"",""price"":99.9}",201,返回创建的商品,高
+API-022,创建商品,POST,/products,价格为负数,"{""title"":""test"",""price"":-10}",400,返回价格不能为负,高
+API-023,创建商品,POST,/products,价格为0,"{""title"":""test"",""price"":0}",201或400,根据业务规则，免费商品或报错,低
+API-024,获取订单列表,GET,/posts?_limit=5,获取订单列表（模拟）,无,200,返回5条订单数据,高
+API-025,获取订单列表,GET,/posts,按用户筛选,userId=1,200,返回userId=1的所有订单,中
+API-026,创建订单,POST,/posts,正常创建订单,"{""userId"":1,""title"":""订单1""}",201,返回创建的订单,高
+API-027,创建订单,POST,/posts,缺少userId,"{""title"":""订单1""}",400或500,返回参数错误,高
+API-028,更新订单,PUT,/posts/1,更新订单状态,"{""userId"":1,""title"":""已支付""}",200,返回更新后的订单,中
+API-029,删除订单,DELETE,/posts/1,删除订单,无,200,删除成功,中
+API-030,接口鉴权,GET,/users,未带Token访问,无,401,返回未授权错误,高
+API-031,接口鉴权,GET,/users,带无效Token,Authorization: invalid,401,返回Token无效,高
+API-032,接口鉴权,GET,/users,带过期Token,Authorization: expired,401,返回Token已过期,中
+API-033,响应时间,GET,/users,接口响应时间测试,无,200,响应时间<500ms,中
+API-034,响应格式,GET,/users/1,响应Content-Type,无,200,Content-Type为application/json,低
+API-035,参数校验,GET,/users,_limit超大值,_limit=1000000,200或400,返回限制数量或参数过大错误,低
