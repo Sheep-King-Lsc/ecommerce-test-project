@@ -1,6 +1,6 @@
-"""
+﻿"""
 商品列表页面对象
-封装商品列表、搜索、排序等操作
+封装商品列表、排序、详情等操作
 """
 from selenium.webdriver.common.by import By
 from base.base_page import BasePage

@@ -1,6 +1,6 @@
-"""
-商品搜索与排序测试用例
-覆盖：商品列表、排序、价格验证等场景
+﻿"""
+商品列表与排序测试用例
+覆盖：商品列表展示、排序、价格验证、加购等场景
 """
 import pytest
 from pages.product_page import ProductPage
